@@ -10,3 +10,7 @@
 ## Outline
 
 
+#### Future features (After v1.0)
+
+- Have CareerBot edit my Resume by searching for relevant keywords in a job listing and reorganizing my skills to fit those keywords (The goal is to personalize as if I was rewriting it - not to be disingenuous).
+- Add addition job-board websites to CareerBot
