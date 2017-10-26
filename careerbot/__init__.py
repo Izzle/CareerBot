@@ -11,7 +11,16 @@ import safe
 try:
     token = safe.API_KEYS()
     url = 'https://community-angellist.p.mashape.com/jobs'
-    print(token)
+    headers = {}
+    headers['token'] = token
+
+    webRequest = urllib.request.Request(url, headers=headers)
+    resp = urllib.request.urlopen(webRequest)
+    respData = resp.read()
+
+    saveFile = open('jobListings.txt', 'w')
+    saveFile.write(str(respData))
+    saveFile.close()
     # EUREKA!
 
 except Exception as e:
