@@ -5,15 +5,14 @@
 
 import urllib.request
 import urllib.parse
-import sys
-sys.path.insert(0, '/docs/safe.py')
 import safe
 
+
 try:
-    # token = API_KEYS()
-    # token = secrets.API_KEYS
-    # print(token)
-    print(dir(safe))
+    token = safe.API_KEYS()
+    url = 'https://community-angellist.p.mashape.com/jobs'
+    print(token)
+    # EUREKA!
 
 except Exception as e:
     print(str(e))
