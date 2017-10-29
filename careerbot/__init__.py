@@ -8,8 +8,13 @@ import urllib.parse
 import safe
 import bs4 as bs
 
-
-sauce = urllib.request.openurl('https://angel.co/jobs#find/f!%7B%7D').read()
+url = 'https://angel.co/jobs#find/f!%7B%7D'
+headers = {}
+headers['User-Agent'] = "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"
+req = urllib.request.Request(url, headers=headers)
+resp = urllib.request.urlopen(req)
+sauce = resp.read()
+# sauce = urllib.request.urlopen('https://angel.co/jobs#find/f!%7B%7D').read()
 soup = bs.BeautifulSoup(sauce, 'lxml')
 
 print(soup.title)
