@@ -6,25 +6,42 @@
 import urllib.request
 import urllib.parse
 import safe
+import bs4 as bs
 
 
-try:
-    # Unfortunately this API has been shut off to public use
-    # Time to learn how to scrape
-    token = safe.API_KEYS()
-    url = 'https://community-angellist.p.mashape.com/jobs'
-    headers = {}
-    headers['X-Mashape-Key'] = token
-    headers['Accept'] = 'application/json'
+sauce = urllib.request.openurl('https://angel.co/jobs#find/f!%7B%7D').read()
+soup = bs.BeautifulSoup(sauce, 'lxml')
 
-    webRequest = urllib.request.Request(url, headers=headers)
-    resp = urllib.request.urlopen(webRequest)
-    respData = resp.read()
+print(soup.title)
 
-    saveFile = open('jobListings.txt', 'w')
-    saveFile.write(str(respData))
-    saveFile.close()
-    # 401 Unauthorized
 
-except Exception as e:
-    print(str(e))
+
+
+
+
+
+
+
+# try:
+'''Unfortunately this API has been shut off to public use
+    Commenting out code for now. Now I must try a new method
+    entirely: web scraping.
+    '''
+
+# token = safe.API_KEYS()
+# url = 'https://community-angellist.p.mashape.com/jobs'
+# headers = {}
+# headers['X-Mashape-Key'] = token
+# headers['Accept'] = 'application/json'
+
+# webRequest = urllib.request.Request(url, headers=headers)
+# resp = urllib.request.urlopen(webRequest)
+# respData = resp.read()
+
+# saveFile = open('jobListings.txt', 'w')
+# saveFile.write(str(respData))
+# saveFile.close()
+# 401 Unauthorized
+
+# except Exception as e:
+# print(str(e))
