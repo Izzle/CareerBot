@@ -11,15 +11,27 @@ import bs4 as bs
 url = 'https://angel.co/jobs#find/f!%7B%7D'
 headers = {}
 headers['User-Agent'] = "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"
+
 req = urllib.request.Request(url, headers=headers)
 resp = urllib.request.urlopen(req)
+
 sauce = resp.read()
-# sauce = urllib.request.urlopen('https://angel.co/jobs#find/f!%7B%7D').read()
 soup = bs.BeautifulSoup(sauce, 'lxml')
 
-print(soup.title)
+# IDEA: If I can't scroll and parse the page initally, I COULD try
+# sorting the links, going to each job posting specifically, and
+# parsing the data from the individual pages.
+# The issues with this approach is making sure I get ALL the links to
+# jobs I'm interested in. In this case we'd be creating a real web crawler
+# Just be careful not to log duplicates, try to check for job # or title
+for urls in soup.find_all('a'):
+    every_link = urls.get('href')
+    # print(every_link)
 
+    # for jobs in every_link:
+    #     print(jobs)
 
+    # print(urls.get('href'))
 
 
 
