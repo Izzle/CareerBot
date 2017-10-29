@@ -7,6 +7,8 @@ import urllib.request
 import urllib.parse
 import safe
 import bs4 as bs
+import shelve    # Recommended by plopo/surye
+import statistics as stats
 
 url = 'https://angel.co/jobs#find/f!%7B%7D'
 headers = {}
@@ -24,6 +26,10 @@ soup = bs.BeautifulSoup(sauce, 'lxml')
 # The issues with this approach is making sure I get ALL the links to
 # jobs I'm interested in. In this case we'd be creating a real web crawler
 # Just be careful not to log duplicates, try to check for job # or title
+
+# Approach 1) Parse all data the listings from the main job page 
+# Trying to search and parse out all the job URLS I see currently
+# Once this works, it needs to be able to scroll or drive down the page
 for urls in soup.find_all('a'):
     every_link = urls.get('href')
     # print(every_link)
@@ -33,10 +39,20 @@ for urls in soup.find_all('a'):
 
     # print(urls.get('href'))
 
+# Approach 2) Get a bunch of job URLS, visit each page, and parse the 
+# information from that page (easier to parse, but more work and less elegant)
+# Trying to parse a single job posting page
+job_url = 'https://angel.co/crunchbase/jobs/93350-quality-engineer'
+req2 = urllib.request.Request(job_url, headers=headers)
+resp2 = urllib.request.urlopen(req2).read()
+soup2 = bs.BeautifulSoup(resp2, 'lxml')
 
+# print(soup2.get_text())
+print('Waka waka waka')
+print(soup2.select('p'))
 
-
-
+# Dictionary of classes used by Angellist
+classes = {'Job Description': 'job-description', 'Compensation': 's-vgBottom2'}
 
 
 # try:
