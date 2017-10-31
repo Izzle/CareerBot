@@ -48,11 +48,30 @@ resp2 = urllib.request.urlopen(req2).read()
 soup2 = bs.BeautifulSoup(resp2, 'lxml')
 
 # print(soup2.get_text())
-print('Waka waka waka')
-print(soup2.select('p'))
+# print('Waka waka waka')
+# print(soup2.select('p'))
+
 
 # Dictionary of classes used by Angellist
 classes = {'Job Description': 'job-description', 'Compensation': 's-vgBottom2'}
+
+jobDes = 'job-description'
+vgBot = 's-vgBottom2'
+vgTop = 's-vgBottom0_5'
+
+print('Skills:')
+for div in soup2.find_all('div', class_=vgTop):
+    if div.text == 'Skills':
+        info = div.find_next_sibling('div', class_=vgBot)
+        print(info.string)
+
+print('*' * 20)
+
+print('Compensation:')
+for div in soup2.find_all('div', class_=vgBot):
+    if div.text == 'Compensation':
+        info = div.find_next_siblings('div', class_=vgBot)
+        print(info.contents)
 
 
 # try:
