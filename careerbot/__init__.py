@@ -72,9 +72,9 @@ for main_div in soup2.find_all('div', class_=vgTop):
     if main_div.text == 'Compensation':
         # We iterate over the the elements because .string wont work on lists
         # and a <br> would break the code
-        for info in main_div:
-            info = main_div.find_next_siblings('div', class_=vgBot)
-            print(info)
+        main_div_sibling = main_div.find_next_siblings('div', class_=vgBot)
+        for info in main_div_sibling:
+            print(info.get_text())
 
 
 # try:
